@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  postgres_db:
+    image: postgres:10
+    container_name: "postgres_local"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=projeto
+      - POSTGRES_PASSWORD=projeto
+    volumes:
+      - "./data/postgres:/var/lib/postgresql/data"
+    ports:
+      - 5433:5432
