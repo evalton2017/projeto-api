@@ -27,11 +27,13 @@ public class ClienteController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Cliente> clientes(){
-        return service.lista();
+        return service.listar();
     }
 
     @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Cliente cliente(@PathVariable("id")  Long id){
         return service.consultar(id).orElseThrow(
                 ()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"cliente não encontrado"));

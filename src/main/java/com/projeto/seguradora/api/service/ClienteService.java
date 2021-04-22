@@ -20,7 +20,7 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
-    public List<Cliente> lista() {
+    public List<Cliente> listar() {
         return clienteRepository.findAll();
     }
 

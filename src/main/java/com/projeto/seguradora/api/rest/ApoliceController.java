@@ -29,6 +29,7 @@ public class ApoliceController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Apolice> Apolices(){
         return service.lista();
     }
@@ -51,8 +52,8 @@ public class ApoliceController {
         service.atualizar(id,apolice);
     }
 
-
     @GetMapping("consulta/{numero}")
+    @ResponseStatus(HttpStatus.OK)
     public ConsultaApoliceDTO consultar(@PathVariable("numero")  Long numero) throws ExceptionErros {
         return service.consultarApolice(numero);
     }

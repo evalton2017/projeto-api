@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(schema = "projeto", name="tb_apolice")
+@Table(schema = "public", name="tb_apolice")
 public class Apolice  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
