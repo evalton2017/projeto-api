@@ -1,5 +1,6 @@
 package com.projeto.seguradora.api.rest;
 
+import com.projeto.seguradora.api.exception.ExceptionErros;
 import com.projeto.seguradora.api.model.Cliente;
 import com.projeto.seguradora.api.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,9 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Cliente> salvar(@RequestBody @Valid Cliente cliente){
+    public ResponseEntity<Cliente> salvar(@RequestBody @Valid Cliente cliente) throws ExceptionErros {
         service.salvar(cliente);
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping

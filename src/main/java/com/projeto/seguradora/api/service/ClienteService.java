@@ -1,13 +1,18 @@
 package com.projeto.seguradora.api.service;
 
+import com.projeto.seguradora.api.exception.DataIntegrityException;
+import com.projeto.seguradora.api.exception.ExceptionErros;
 import com.projeto.seguradora.api.model.Cliente;
 import com.projeto.seguradora.api.repository.ClienteRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -19,7 +24,10 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public Cliente salvar(Cliente cliente) {
+    public Cliente salvar(Cliente cliente) throws ExceptionErros {
+        if(validaDuplicidade(cliente.getCpf())){
+            throw new DataIntegrityException("CPF já cadastrado.");
+        }
         return clienteRepository.save(cliente);
     }
 
@@ -53,5 +61,13 @@ public class ClienteService {
                     return Void.TYPE;
                 })
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    private Boolean validaDuplicidade(String cpf){
+        Cliente cliente = clienteRepository.findByCpf(cpf);
+        if(Objects.nonNull(cliente)){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 }
