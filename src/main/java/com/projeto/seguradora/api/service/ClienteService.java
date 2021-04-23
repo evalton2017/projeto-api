@@ -57,6 +57,9 @@ public class ClienteService {
                 .findById(id)
                 .map(clienteNew ->{
                     clienteNew.setNome(cliente.getNome());
+                    clienteNew.setCpf(cliente.getCpf());
+                    clienteNew.setCidade(cliente.getCidade());
+                    clienteNew.setUf(cliente.getUf());
                     clienteRepository.save(clienteNew);
                     return Void.TYPE;
                 })
